@@ -1,0 +1,122 @@
+/* =========================
+   PAGE CONTAINER
+========================= */
+
+.page-container {
+  background-color: white;
+
+  padding: 24px;
+
+  border-radius: 10px;
+
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+
+/* =========================
+   BREADCRUMB
+========================= */
+
+.breadcrumb {
+  margin-bottom: 20px;
+
+  font-size: 14px;
+  color: #666;
+}
+
+
+/* =========================
+   ACTION BAR
+========================= */
+
+.action-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 20px;
+}
+
+.action-bar h2 {
+  font-size: 24px;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.action-buttons button {
+  border: none;
+
+  padding: 10px 16px;
+
+  border-radius: 6px;
+
+  background-color: #2563eb;
+  color: white;
+
+  font-size: 14px;
+}
+
+.action-buttons button:hover {
+  opacity: 0.9;
+}
+
+
+/* =========================
+   SEARCH FILTER
+========================= */
+
+.search-filter {
+  margin-bottom: 20px;
+
+  padding: 20px;
+
+  border-radius: 8px;
+
+  background-color: #f8fafc;
+
+  border: 1px solid #e2e8f0;
+}
+
+
+/* =========================
+   GRID
+========================= */
+
+.grid-wrapper table {
+  width: 100%;
+
+  border-collapse: collapse;
+}
+
+.grid-wrapper th,
+.grid-wrapper td {
+  padding: 12px;
+
+  border: 1px solid #e5e7eb;
+
+  text-align: left;
+}
+
+.grid-wrapper th {
+  background-color: #f1f5f9;
+}
+
+.grid-wrapper tbody tr:hover {
+  background-color: #f8fafc;
+}
+
+
+/* =========================
+   PAGING
+========================= */
+
+.paging-area {
+  display: flex;
+  justify-content: center;
+
+  margin-top: 20px;
+}
