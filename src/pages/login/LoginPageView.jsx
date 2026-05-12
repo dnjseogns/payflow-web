@@ -33,6 +33,11 @@ function LoginPageView({
           placeholder="비밀번호"
           value={userPw}
           onChange={(e) => setUserPw(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              loginBtnOnClick();
+            }
+          }}
         />
 
         <button

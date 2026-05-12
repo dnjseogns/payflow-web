@@ -23,7 +23,28 @@ CORS는 브라우저가 검사하는데,
 proxy 쓰면 브라우저 vite 서버(5173포트)로 같은 orgin으로 인식한다.
 실제 backend 호출은 vite 서버가 backend(8080포트)로 대신한다.
 
-[5] 흐름도
+[5] 인증 절차 설명
+1. 인증 절차
+1) client 로그인 요청(/api/auth/login) -> server 성공응답(cookie:refreshToken, json:accessToken, user정보)
+2) client 데이터 저장 : accessToken(localStorage 저장), user정보(redux에 persist 저장. 새로고침후에도 데이터 남음.)
+* accessToken은 server인증시, user정보는 client에서 사용함.
+3) client 이후 요청 시. axios intercept로 Header에 AccessToken값 자동주입하여 인증용으로 사용.
+
+2. AccessToken 만료 시 절차
+1) server : AccessToken 만료 시 2001에러코드 반환
+2) client : axios interceptor에서 2001코드일 경우 api(/api/auth/reissue) 요청
+3) server : cookie의 refresh토큰과 db에 저장된 user의 refresh토큰값과 같을 경우 access/refresh token 재발급 후 성공응답(cookie:refreshToken, json:accessToken, user정보)
+4) client : 데이터 저장.(인증 절차와 같음)
+
+3. logout시 
+1) 로그아웃 시 Redux state 및 저장된 토큰을 모두 제거한다.
+
+[6] 메뉴 세팅
+1) 로그인 시
+2) 최초 1회 AuthInitializer 실행
+* 새로고침 시 AuthInitializer가 실행되며 메뉴api 재요청(auth관련 이슈로 영구저장하지 않음)
+
+[7] 화면 흐름도
 App
  └── MainRoute
       └── MainLayout
@@ -43,19 +64,3 @@ App
            │
            └── Footer
 
-
-
-
-
-┌────────────────────────────┐
-│ 홈 > 사용자관리            │ ← Breadcrumb
-├────────────────────────────┤
-│ 사용자 관리                │ ← Title
-│ 조회 추가 수정 삭제 Excel  │ ← ActionBar
-├────────────────────────────┤
-│ 검색조건 영역              │ ← SearchArea
-├────────────────────────────┤
-│ Grid/Table                 │ ← Content
-├────────────────────────────┤
-│ Pagination                 │
-└────────────────────────────┘

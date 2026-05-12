@@ -1,3 +1,4 @@
+
 /* =========================
    ROOT LAYOUT
 ========================= */
@@ -12,27 +13,153 @@
 
 
 /* =========================
-   HEADER
+   HEADER (TOP BAR)
 ========================= */
 
-header {
+.app-header {
   height: 60px;
 
   display: flex;
   align-items: center;
+  justify-content: space-between;
 
   padding: 0 24px;
 
-  background-color: #1e293b;
+  background: linear-gradient(90deg, #0f172a, #1e293b);
   color: white;
 
-  font-size: 20px;
-  font-weight: bold;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
+  position: relative;
+}
+
+
+/* HEADER LEFT */
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.logo-box {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: #38bdf8;
+}
+
+.system-title {
+  font-size: 14px;
+  color: #cbd5e1;
+  font-weight: 500;
+}
+
+
+/* HEADER CENTER (NOTICE) */
+
+.header-center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.notice-badge {
+  display: inline-flex;
+  align-items: center;
+
+  max-width: 360px;
+
+  padding: 6px 14px;
+
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(148, 163, 184, 0.3);
+
+  border-radius: 999px;
+
+  font-size: 12px;
+  color: #e2e8f0;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  animation: noticePulse 3s infinite ease-in-out;
+}
+
+/* NOTICE LABEL */
+.notice-badge::before {
+  content: "NOTICE";
+
+  background: #f59e0b;
+  color: #111827;
+
+  font-size: 10px;
+  font-weight: 700;
+
+  padding: 2px 6px;
+  border-radius: 999px;
+
+  margin-right: 8px;
+}
+
+@keyframes noticePulse {
+  0% {
+    opacity: 0.85;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-1px);
+  }
+  100% {
+    opacity: 0.85;
+    transform: translateY(0);
+  }
+}
+
+
+/* HEADER RIGHT */
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.user-info {
+  font-size: 13px;
+  color: #e2e8f0;
+}
+
+.logout-btn {
+  background: #ef4444;
+  border: none;
+
+  padding: 6px 12px;
+
+  border-radius: 6px;
+
+  color: white;
+  font-size: 13px;
+
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+.logout-btn:hover {
+  background: #dc2626;
 }
 
 
 /* =========================
-   TOP MENU
+   TOP MENU (NAV)
 ========================= */
 
 nav {
@@ -40,13 +167,29 @@ nav {
 
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 40px;
 
   padding: 0 24px;
 
   background-color: white;
 
   border-bottom: 1px solid #dcdcdc;
+}
+
+nav a {
+  text-decoration: none;
+  color: #334155;
+  font-size: 14px;
+  font-weight: 500;
+
+  padding: 6px 10px;
+  border-radius: 6px;
+
+  transition: 0.2s;
+}
+
+nav a:hover {
+  background-color: #e2e8f0;
 }
 
 
@@ -65,15 +208,140 @@ nav {
    FOOTER
 ========================= */
 
-footer {
+/* =========================
+   FOOTER
+========================= */
+
+.app-footer {
   height: 50px;
 
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: space-between;
+
+  padding: 0 24px;
 
   background-color: #1e293b;
-  color: white;
+  color: #cbd5e1;
+
+  font-size: 13px;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* LEFT */
+.footer-left {
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+/* RIGHT (version) */
+.footer-right {
+  font-size: 12px;
+  color: #38bdf8;
+  font-weight: 600;
+}
+
+
+
+
+
+
+/* =========================
+   TOP MENU DROPDOWN
+========================= */
+
+.top-menu-dropdown {
+  position: relative;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+}
+
+.top-menu-title {
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+
+  padding: 0 18px;
+
+  border-radius: 6px;
 
   font-size: 14px;
+  font-weight: 500;
+  color: #334155;
+
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+.top-menu-title:hover {
+  background-color: #e2e8f0;
+}
+
+
+/* DROPDOWN */
+
+.dropdown-menu {
+  position: absolute;
+
+  top: 100%;
+  left: 0;
+
+  min-width: 180px;
+
+  display: none;
+  flex-direction: column;
+
+  padding: 8px;
+
+  background-color: white;
+
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+
+  box-shadow:
+    0 10px 25px rgba(0,0,0,0.12);
+
+  z-index: 1000;
+}
+
+.top-menu-dropdown:hover .dropdown-menu {
+  display: flex;
+}
+
+
+/* DROPDOWN ITEM */
+
+.dropdown-item {
+  text-decoration: none;
+
+  padding: 10px 12px;
+
+  border-radius: 6px;
+
+  font-size: 14px;
+  color: #334155;
+
+  transition: 0.2s;
+}
+
+.dropdown-item:hover {
+  background-color: #f1f5f9;
+}
+
+.dropdown-item.active {
+  background-color: #2563eb;
+  color: white;
+}
+
+
+/* TOP ACTIVE */
+
+.top-menu.active {
+  background-color: #2563eb;
+  color: white;
 }
