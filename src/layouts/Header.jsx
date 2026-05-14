@@ -18,7 +18,6 @@ function Header() {
 
     // 2. redux 초기화
     logoutClear(dispatch);
-    clearMenu();
 
     // 3. 로그인 페이지 이동
     navigate('/login');

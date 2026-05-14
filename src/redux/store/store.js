@@ -6,11 +6,12 @@ import authReducer from '@/redux/slice/authSlice';
 import menuReducer from '@/redux/slice/menuSlice';
 
 const persistedAuthReducer = persistReducer(persistConfig, authReducer);
+const persistedMenuReducer = persistReducer(persistConfig, menuReducer);
 
 const store = configureStore({
   reducer: {
     auth: persistedAuthReducer,
-    menu: menuReducer
+    menu: persistedMenuReducer
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

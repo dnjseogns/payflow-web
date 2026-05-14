@@ -5,7 +5,7 @@ function ErrorPage() {
   const navigate = useNavigate();
 
   const goHome = () => {
-    navigate('/dash'); // 로그인 기준 메인으로 이동
+    navigate('/dashboard'); // 로그인 기준 메인으로 이동
   };
 
   const goBack = () => {

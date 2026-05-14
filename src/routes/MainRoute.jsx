@@ -2,14 +2,13 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 
-import LoginPage from "@/pages/login/LoginPage";
-import ErrorPage from '@/pages/error/ErrorPage';
+import LoginPage from '@/pages/login/LoginPage';
+import ErrorPage from '@/pages/common/error/ErrorPage';
 import MainLayout from '@/layouts/MainLayout';
+import DashboardPage from '@/pages/dash/DashboardPage';
 
+import ProtectedRoute from '@/routes/ProtectedRoute';
 import { RouteComponentMap } from '@/routes/RouteComponentMap';
-// import DevPage from '@/pages/dev/DevPage';
-// import DashBoardPage from '@/pages/dash/DashBoardPage';
-// import UserPage from '@/pages/user/UserPage';
 
 import '@/css/layout.css';
 import '@/css/component.css';
@@ -17,6 +16,8 @@ import '@/css/component.css';
 function MainRoute() {
   const isLogin = useSelector(state => state.auth.isLogin);
   const menuList = useSelector(state => state.menu.menuList);
+
+  // console.log("isLogin",isLogin);
 
   const renderMenuRoutes = (menus) => {
 
@@ -58,8 +59,15 @@ function MainRoute() {
       {/* 로그인 페이지 */}
       <Route
         path="/login"
-        element={isLogin ? <Navigate to="/dash" /> : <LoginPage />}
+        element={isLogin ? <Navigate to="/dashboard" /> : <LoginPage />}
       />
+      {/* 대시보드 페이지 */}
+      <Route
+        path="/dashboard"
+        element={isLogin ? <MainLayout /> : <Navigate to="/login" replace />}
+      >
+        <Route index element={<DashboardPage />} />
+      </Route>
 
       {/* 메인 페이지 */}
       <Route 
@@ -67,15 +75,14 @@ function MainRoute() {
       >
         {renderMenuRoutes(menuList)}
       </Route>
-
       {/* 기본 리다이렉트 */}
       <Route
         path="/"
-        element={<Navigate to={isLogin ? "/dash" : "/login"} />}
+        element={<Navigate to={isLogin ? "/dashboard" : "/login"} />}
       />
 
       {/* 404 */}
-      <Route path="*" element={<ErrorPage />} />
+      <Route path="*" element={isLogin ? <ErrorPage /> : <Navigate to="/login" replace />} />
     </Routes>
   );
 }

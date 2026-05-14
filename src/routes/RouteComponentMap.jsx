@@ -1,76 +1,82 @@
-import DashBoardPage from '@/pages/dash/DashBoardPage';
+// import DashboardPage from '@/pages/dash/DashboardPage';
 
 // // PAYMENT
-// import PaymentListPage from '@/pages/payments/list/PaymentListPage';
-// import PaymentFailPage from '@/pages/payments/fail/PaymentFailPage';
-// import PaymentCancelPage from '@/pages/payments/cancel/PaymentCancelPage';
-// import PaymentRefundPage from '@/pages/payments/refund/PaymentRefundPage';
+// import PaymentsListPage from '@/pages/payments/list/PaymentsListPage';
+// import PaymentsFailPage from '@/pages/payments/fail/PaymentsFailPage';
+// import PaymentsCancelPage from '@/pages/payments/cancel/PaymentsCancelPage';
+// import PaymentsRefundPage from '@/pages/payments/refund/PaymentsRefundPage';
 
-// // STATISTICS
-// import PaymentStatisticsPage from '@/pages/statistics/payments/PaymentStatisticsPage';
-// import DailyStatisticsPage from '@/pages/statistics/daily/DailyStatisticsPage';
-// import MonthlyStatisticsPage from '@/pages/statistics/monthly/MonthlyStatisticsPage';
+// // STATISTIC
+// import StatisticRetryPage from '@/pages/statistic/retry/StatisticRetryPage';
+// import StatisticListPage from '@/pages/statistic/list/StatisticListPage';
 
 // // SETTLEMENT
-// import DailySettlementPage from '@/pages/settlements/daily/DailySettlementPage';
-// import MonthlySettlementPage from '@/pages/settlements/monthly/MonthlySettlementPage';
+// import SettlementRetryPage from '@/pages/settlement/retry/SettlementRetryPage';
+// import SettlementListPage from '@/pages/settlement/list/SettlementListPage';
+// import SettlementAggregatePage from '@/pages/settlement/aggregate/SettlementAggregatePage';
 
 // // RECONCILIATION
-// import ReconciliationPaymentPage from '@/pages/reconciliation/payments/ReconciliationPaymentPage';
-// import UnsettledPage from '@/pages/reconciliation/unsettled/UnsettledPage';
-// import MismatchPage from '@/pages/reconciliation/mismatch/MismatchPage';
+// import ReconciliationPaymentPage from '@/pages/reconciliation/payment/ReconciliationPaymentPage';
+// import ReconciliationUnsettledPage from '@/pages/reconciliation/unsettled/ReconciliationUnsettledPage';
+// import ReconciliationMismatchPage from '@/pages/reconciliation/mismatch/ReconciliationMismatchPage';
 
 // // OPERATION
-// import MerchantPage from '@/pages/merchants/MerchantPage';
-// import UserPage from '@/pages/user/UserPage';
-// import RolePage from '@/pages/role/RolePage';
-// import MenuPage from '@/pages/menu/MenuPage';
-// import RoleMenuPage from '@/pages/roleMenu/RoleMenuPage';
-// import NoticePage from '@/pages/notices/NoticePage';
-// import InquiryPage from '@/pages/inquiries/InquiryPage';
+// import MerchantPage from '@/pages/operation/merchant/MerchantPage';
+import UserPage from '@/pages/operation/user/UserPage';
+// import RolePage from '@/pages/operation/role/RolePage';
+// import MenuPage from '@/pages/operation/menu/MenuPage';
+// import RoleMenuPage from '@/pages/operation/role-menu/RoleMenuPage';
+// import NoticePage from '@/pages/operation/notice/NoticePage';
+// import InquiryPage from '@/pages/operation/inquiry/InquiryPage';
 
 // // SYSTEM
-// import BatchPage from '@/pages/batches/BatchPage';
-// import CodePage from '@/pages/codes/CodePage';
-// import AccessLogPage from '@/pages/logs/access/AccessLogPage';
-// import ApiLogPage from '@/pages/logs/api/ApiLogPage';
-// import ErrorLogPage from '@/pages/logs/error/ErrorLogPage';
+// import BatchPage from '@/pages/system/batch/BatchPage';
+// import CodePage from '@/pages/system/code/CodePage';
+// import AccessLogPage from '@/pages/system/access-log/AccessLogPage';
+// import ApiLogPage from '@/pages/system/api-log/ApiLogPage';
+// import ErrorLogPage from '@/pages/system/error-log/ErrorLogPage';
 
 // DEFAULT
-import DevPage from '@/pages/dev/DevPage';
+import DevPage from '@/pages/common/dev/DevPage';
 
 export const RouteComponentMap = {
-  '/dashboard': <DashBoardPage />,
+  // '/dashboard': <DashboardPage />,
 
-  // '/payments/list': <PaymentListPage />,
-  // '/payments/fail': <PaymentFailPage />,
-  // '/payments/cancel': <PaymentCancelPage />,
-  // '/payments/refund': <PaymentRefundPage />,
+  // // PAYMENT
+  // '/payment/list': <PaymentsListPage />,
+  // '/payment/fail': <PaymentsFailPage />,
+  // '/payment/cancel': <PaymentsCancelPage />,
+  // '/payment/refund': <PaymentsRefundPage />,
 
-  // '/statistics/payments': <PaymentStatisticsPage />,
-  // '/statistics/daily': <DailyStatisticsPage />,
-  // '/statistics/monthly': <MonthlyStatisticsPage />,
+  // // STATISTIC
+  // '/statistic/retry': <StatisticRetryPage />,
+  // '/statistic/list': <StatisticListPage />,
 
-  // '/settlements/daily': <DailySettlementPage />,
-  // '/settlements/monthly': <MonthlySettlementPage />,
+  // // SETTLEMENT
+  // '/settlement/retry': <SettlementRetryPage />,
+  // '/settlement/list': <SettlementListPage />,
+  // '/settlement/aggregate': <SettlementAggregatePage />,
 
-  // '/reconciliation/payments': <ReconciliationPaymentPage />,
-  // '/reconciliation/unsettled': <UnsettledPage />,
-  // '/reconciliation/mismatch': <MismatchPage />,
+  // // RECONCILIATION
+  // '/reconciliation/payment': <ReconciliationPaymentPage />,
+  // '/reconciliation/unsettled': <ReconciliationUnsettledPage />,
+  // '/reconciliation/mismatch': <ReconciliationMismatchPage />,
 
-  // '/merchants': <MerchantPage />,
-  // '/users': <UserPage />,
-  // '/roles': <RolePage />,
-  // '/menus': <MenuPage />,
-  // '/role-menus': <RoleMenuPage />,
-  // '/notices': <NoticePage />,
-  // '/inquiries': <InquiryPage />,
+  // // OPERATION
+  // '/operation/merchant': <MerchantPage />,
+  '/operation/user': <UserPage />,
+  // '/operation/role': <RolePage />,
+  // '/operation/menu': <MenuPage />,
+  // '/operation/role-menu': <RoleMenuPage />,
+  // '/operation/notice': <NoticePage />,
+  // '/operation/inquiry': <InquiryPage />,
 
-  // '/batches': <BatchPage />,
-  // '/codes': <CodePage />,
-  // '/logs/access': <AccessLogPage />,
-  // '/logs/api': <ApiLogPage />,
-  // '/logs/error': <ErrorLogPage />,
+  // // SYSTEM
+  // '/system/batch': <BatchPage />,
+  // '/system/code': <CodePage />,
+  // '/system/access-log': <AccessLogPage />,
+  // '/system/api-log': <ApiLogPage />,
+  // '/system/error-log': <ErrorLogPage />,
 
   'default': <DevPage />
 };
