@@ -9,8 +9,10 @@ import '@/css/component.css';
 function App() {
   const auth = useSelector(state => state.auth);
   const menu = useSelector(state => state.menu);
-  // console.log("auth: ",auth);
-  // console.log("menu: ",menu);
+  const code = useSelector(state => state.code);
+  console.log("auth: ",auth);
+  console.log("menu: ",menu);
+  console.log("code: ",code);
   // console.log("persist:root:", localStorage.getItem("persist:root"));
 
   return (<Fragment>

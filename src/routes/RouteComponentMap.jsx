@@ -1,10 +1,10 @@
 // import DashboardPage from '@/pages/dash/DashboardPage';
 
 // // PAYMENT
-// import PaymentsListPage from '@/pages/payments/list/PaymentsListPage';
-// import PaymentsFailPage from '@/pages/payments/fail/PaymentsFailPage';
-// import PaymentsCancelPage from '@/pages/payments/cancel/PaymentsCancelPage';
-// import PaymentsRefundPage from '@/pages/payments/refund/PaymentsRefundPage';
+import PaymentsListPage from '@/pages/payments/list/PaymentListPage';
+// import PaymentsFailPage from '@/pages/payments/fail/PaymentFailPage';
+// import PaymentsCancelPage from '@/pages/payments/cancel/PaymentCancelPage';
+// import PaymentsRefundPage from '@/pages/payments/refund/PaymentRefundPage';
 
 // // STATISTIC
 // import StatisticRetryPage from '@/pages/statistic/retry/StatisticRetryPage';
@@ -43,7 +43,7 @@ export const RouteComponentMap = {
   // '/dashboard': <DashboardPage />,
 
   // // PAYMENT
-  // '/payment/list': <PaymentsListPage />,
+  '/payment/list': <PaymentsListPage />,
   // '/payment/fail': <PaymentsFailPage />,
   // '/payment/cancel': <PaymentsCancelPage />,
   // '/payment/refund': <PaymentsRefundPage />,

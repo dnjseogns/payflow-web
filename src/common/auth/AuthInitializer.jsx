@@ -1,9 +1,10 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
+import { menuApi } from '@/api/menuApi';
 import { setMenuList } from '@/redux/slice/menuSlice';
-import { menuApi } from '@/pages/common/menu/menuApi';
-
+import { codeApi } from '@/api/codeApi';
+import { setCodeList } from '@/redux/slice/codeSlice';
 import { logoutClear } from '@/common/auth/authUtil';
 
 function AuthInitializer() {
@@ -23,12 +24,17 @@ function AuthInitializer() {
         return;
       }
 
-      // persist로 저장하면서 주석처리함
-      // const { code, data } = await menuApi.reqGetMyMenuList();
-      // if (code !== '0000') {
-      //   return;
-      // }
-      // dispatch(setMenuList(data));
+      //redux 세팅(menu, code)
+      const menuResult = await menuApi.reqGetMyMenuList();
+      if (menuResult.code !== '0000') {
+        return;
+      }
+      const codeResult = await codeApi.reqGetCodeList();
+      if (codeResult.code !== '0000') {
+        return;
+      }
+      dispatch(setMenuList(menuResult.data));
+      dispatch(setCodeList(codeResult.data));
 
     } catch (error) {
 

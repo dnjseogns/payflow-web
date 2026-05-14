@@ -1,7 +1,13 @@
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import '@/css/pages/error.css';
 
 function ErrorPage() {
+  // const auth = useSelector(state => state.auth);
+  // const menu = useSelector(state => state.menu);
+  // console.log("auth: ",auth);
+  // console.log("menu: ",menu);
+
   const navigate = useNavigate();
 
   const goHome = () => {
@@ -11,6 +17,8 @@ function ErrorPage() {
   const goBack = () => {
     navigate(-1);
   };
+
+  console.log("");
 
   return (
     <div className="error-container">

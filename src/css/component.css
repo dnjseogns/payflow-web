@@ -243,3 +243,106 @@
 
   cursor: not-allowed;
 }
+
+
+
+
+
+
+/* =========================
+   SEARCHABLE DROPDOWN
+========================= */
+
+.searchable-dropdown {
+  position: relative;
+  width: 100%;
+  min-width: 180px;
+}
+
+/* INPUT WRAPPER (선택적으로 쓰면 좋음) */
+.searchable-dropdown input {
+  width: 100%;
+  height: 36px;
+
+  padding: 6px 10px;
+
+  border: 1px solid #d0d7de;
+  border-radius: 6px;
+
+  font-size: 13px;
+
+  outline: none;
+  box-sizing: border-box;
+
+  transition: border 0.15s ease, box-shadow 0.15s ease;
+}
+
+.searchable-dropdown input:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.15);
+}
+
+/* DROPDOWN PANEL */
+.searchable-dropdown .dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+
+  max-height: 240px;
+  overflow-y: auto;
+
+  z-index: 9999;
+
+  padding: 4px 0;
+  box-sizing: border-box;
+}
+
+/* ITEM */
+.searchable-dropdown .dropdown-item {
+  padding: 8px 12px;
+
+  font-size: 13px;
+  cursor: pointer;
+
+  transition: background 0.15s ease;
+}
+
+.searchable-dropdown .dropdown-item:hover {
+  background-color: #f3f4f6;
+}
+
+/* ACTIVE ITEM */
+.searchable-dropdown .dropdown-item.active {
+  background-color: #e0f2fe;
+  color: #0369a1;
+}
+
+/* EMPTY STATE */
+.searchable-dropdown .empty {
+  padding: 10px;
+  font-size: 12px;
+  color: #9ca3af;
+  text-align: center;
+}
+
+/* SCROLLBAR */
+.searchable-dropdown .dropdown::-webkit-scrollbar {
+  width: 6px;
+}
+
+.searchable-dropdown .dropdown::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 6px;
+}
+
+.searchable-dropdown .dropdown::-webkit-scrollbar-track {
+  background: transparent;
+}
+

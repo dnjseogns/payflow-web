@@ -69,21 +69,7 @@ function UserPageView({
             onEndDateChange={setEndDate}
           />
         </SearchItem>
-
-        <SearchItem label="키워드">
-          <SearchKeywordType
-            type={keywordType}
-            keyword={keyword}
-
-            types={[
-              { label: '사용자ID', value: 'userId' },
-              { label: '사용자명', value: 'userName' }
-            ]}
-
-            onTypeChange={setKeywordType}
-            onKeywordChange={setKeyword}
-          />
-        </SearchItem> */}
+ */}
 
 
 
