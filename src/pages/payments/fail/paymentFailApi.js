@@ -1,9 +1,9 @@
 import axios from '@/common/axios';
 
-export const paymentListApi = {
-  reqPostPaymentList: function(reqParams) {
+export const paymentFailApi = {
+  reqPostPaymentFailList: function(reqParams) {
     return axios.post(
-      '/api/payment/select',
+      '/api/payment-fail/select',
       {
         ...reqParams
       }

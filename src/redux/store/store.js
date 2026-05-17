@@ -10,7 +10,7 @@ const persistedAuthReducer = persistReducer(persistConfig, authReducer);
 const persistedMenuReducer = persistReducer(persistConfig, menuReducer);
 const persistedCodeReducer = persistReducer(persistConfig, codeReducer);
 
-const store = configureStore({
+export const store = configureStore({
   reducer: {
     auth: persistedAuthReducer,
     menu: persistedMenuReducer,

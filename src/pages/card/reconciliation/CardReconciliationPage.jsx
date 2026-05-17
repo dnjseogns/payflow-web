@@ -1,61 +1,58 @@
 import { useEffect, useState } from 'react';
-import { paymentListApi } from '@/pages/payments/list/paymentListApi.js';
-import PaymentListPageView from '@/pages/payments/list/PaymentListPageView.jsx';
-import { useSelector } from 'react-redux';
-import { merchantApi } from '@/pages/merchant/merchantApi.js';
 
-function PaymentListPage() {
-  const payMethodOptions = useSelector(
-    state => state.code.codeList['PAY_METHOD'] || []
-  );
-  const payStatusOptions = useSelector(
-    state => state.code.codeList['PAY_STATUS'] || []
-  );
-  const payMethodSelectOptions = [
-    { label: '전체', value: '' },
+import { cardReconciliationApi } from '@/pages/card/reconciliation/cardReconciliationApi';
+import CardReconciliationPageView from '@/pages/card/reconciliation/CardReconciliationPageView';
 
-    ...payMethodOptions.map(item => ({
-      label: item.codeName,
-      value: item.code
-    }))
-  ];
-  const payStatusSelectOptions = [
-    { label: '전체', value: '' },
+import { merchantApi } from '@/pages/merchant/merchantApi';
 
-    ...payStatusOptions.map(item => ({
-      label: item.codeName,
-      value: item.code
-    }))
-  ];
+function CardReconciliationPage() {
 
-
-  // search params
   const [merchantSelectOptions, setMerchantSelectOptions] = useState([]);
+
   const [merchantId, setMerchantId] = useState();
-  const [payMethod, setPayMethod] = useState();
-  const [payStatus, setPayStatus] = useState();
+  const [reconciliationStatus, setReconciliationStatus] = useState();
 
   const formatDate = (d) => d.toISOString().slice(0, 10);
+
   const [baseDateFrom, setBaseDateFrom] = useState('2026-01-01');
   const [baseDateTo, setBaseDateTo] = useState(formatDate(new Date()));
 
-  // result
-  const [paymentList, setPaymentList] = useState([]);
+  const [reconciliationList, setReconciliationList] = useState([]);
   const [totalCount, setTotalCount] = useState(0);
 
-  // paging
   const [currentPage, setCurrentPage] = useState(1);
+
   const pageSize = 10;
+
+  const reconciliationStatusOptions = [
+    { label: '전체', value: '' },
+    { label: '정상', value: 'MATCH' },
+    { label: '미정산', value: 'UNSETTLED' },
+    { label: '상태불일치', value: 'STATUS_MISMATCH' },
+    { label: '금액불일치', value: 'AMOUNT_MISMATCH' }
+  ];
 
   const columns = [
     { field: 'merchantId', headerName: '가맹점ID' },
     { field: 'baseDate', headerName: '기준일' },
     { field: 'txSeq', headerName: '거래순번' },
+
     { field: 'merchantOrderId', headerName: '주문번호' },
-    { field: 'payMethodName', headerName: '결제수단' },
-    { field: 'payProviderName', headerName: '결제수단' },
-    { field: 'amount', headerName: '금액' },
-    { field: 'payStatusName', headerName: '상태' },
+
+    { field: 'payProvider', headerName: '결제기관' },
+    { field: 'cardCompany', headerName: '카드사' },
+    { field: 'vanName', headerName: 'VAN사' },
+
+    { field: 'paymentAmount', headerName: '결제금액' },
+    { field: 'settlementRequestAmount', headerName: '정산요청금액' },
+
+    { field: 'feeAmount', headerName: '수수료' },
+    { field: 'vatAmount', headerName: '부가세' },
+    { field: 'settlementAmount', headerName: '정산금액' },
+
+    { field: 'reconciliationStatusName', headerName: '대사상태' },
+
+    { field: 'settlementDate', headerName: '정산일' },
     { field: 'createdAt', headerName: '생성일' }
   ];
 
@@ -68,6 +65,7 @@ function PaymentListPage() {
   }, [currentPage]);
 
   const handleSelect = async () => {
+
     try {
 
       const reqParams = {
@@ -75,32 +73,38 @@ function PaymentListPage() {
         size: pageSize,
 
         ...(merchantId ? { merchantId } : {}),
-        ...(payMethod ? { payMethod } : {}),
-        ...(payStatus ? { payStatus } : {}),
 
-        ...(baseDateFrom ? {baseDateFrom: baseDateFrom.replaceAll('-', '')} : {}),
-        ...(baseDateTo ? {baseDateTo: baseDateTo.replaceAll('-', '')} : {})
+        ...(reconciliationStatus
+          ? { reconciliationStatus }
+          : {}),
+
+        ...(baseDateFrom
+          ? { baseDateFrom: baseDateFrom.replaceAll('-', '') }
+          : {}),
+
+        ...(baseDateTo
+          ? { baseDateTo: baseDateTo.replaceAll('-', '') }
+          : {})
       };
 
-      console.log("reqParams",reqParams);
-
-      const { code, message, data } =
-        await paymentListApi.reqPostPaymentList(reqParams);
+      const { code, message, data }
+        = await cardReconciliationApi.reqPostCardReconciliationList(reqParams);
 
       if (code !== '0000') {
         throw new Error(message);
       }
 
-      setPaymentList(data.list);
+      setReconciliationList(data.list);
       setTotalCount(data.totalCount);
 
     } catch (err) {
+
       console.error(err);
     }
   };
 
-  
   const handleMerchantList = async () => {
+
     try {
 
       const { code, message, data }
@@ -115,7 +119,6 @@ function PaymentListPage() {
 
         ...data.map(item => ({
           label: `${item.merchantId}`,
-          // label: `${item.merchantId} - ${item.merchantName}`,
           value: item.merchantId
         }))
       ];
@@ -128,8 +131,6 @@ function PaymentListPage() {
     }
   };
 
-
-
   const handleAdd = () => alert('개발 진행 중');
   const handleUpdate = () => alert('개발 진행 중');
   const handleDelete = () => alert('개발 진행 중');
@@ -140,9 +141,13 @@ function PaymentListPage() {
   };
 
   return (
-    <PaymentListPageView
+    <CardReconciliationPageView
+
       merchantId={merchantId}
       setMerchantId={setMerchantId}
+
+      reconciliationStatus={reconciliationStatus}
+      setReconciliationStatus={setReconciliationStatus}
 
       baseDateFrom={baseDateFrom}
       setBaseDateFrom={setBaseDateFrom}
@@ -150,22 +155,15 @@ function PaymentListPage() {
       baseDateTo={baseDateTo}
       setBaseDateTo={setBaseDateTo}
 
-      payMethod={payMethod}
-      setPayMethod={setPayMethod}
-
-      payStatus={payStatus}
-      setPayStatus={setPayStatus}
-
-      payMethodSelectOptions={payMethodSelectOptions}
-      payStatusSelectOptions={payStatusSelectOptions}
-      merchantSelectOptions={merchantSelectOptions}
-
-      paymentList={paymentList}
+      reconciliationList={reconciliationList}
       totalCount={totalCount}
 
       columns={columns}
       currentPage={currentPage}
       pageSize={pageSize}
+
+      merchantSelectOptions={merchantSelectOptions}
+      reconciliationStatusOptions={reconciliationStatusOptions}
 
       onSelect={handleSelect}
       onAdd={handleAdd}
@@ -177,4 +175,4 @@ function PaymentListPage() {
   );
 }
 
-export default PaymentListPage;
+export default CardReconciliationPage;

@@ -1,9 +1,9 @@
 import axios from '@/common/axios';
 
-export const paymentListApi = {
-  reqPostPaymentList: function(reqParams) {
+export const statisticsRetryPageApi = {
+  reqPostStatisticsRetryList: function (reqParams) {
     return axios.post(
-      '/api/payment/select',
+      '/api/payment-agg-status/select',
       {
         ...reqParams
       }

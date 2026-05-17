@@ -1,24 +1,33 @@
-// import DashboardPage from '@/pages/dash/DashboardPage';
+import DashboardPage from '@/pages/dash/DashboardPage';
 
 // // PAYMENT
 import PaymentsListPage from '@/pages/payments/list/PaymentListPage';
-// import PaymentsFailPage from '@/pages/payments/fail/PaymentFailPage';
-// import PaymentsCancelPage from '@/pages/payments/cancel/PaymentCancelPage';
-// import PaymentsRefundPage from '@/pages/payments/refund/PaymentRefundPage';
+import PaymentsFailPage from '@/pages/payments/fail/PaymentFailPage';
+import PaymentsCancelPage from '@/pages/payments/cancel/PaymentCancelPage';
+import PaymentsRefundPage from '@/pages/payments/refund/PaymentRefundPage';
 
-// // STATISTIC
-// import StatisticRetryPage from '@/pages/statistic/retry/StatisticRetryPage';
-// import StatisticListPage from '@/pages/statistic/list/StatisticListPage';
+// // STATISTICS
+import StatisticsRetryPage from '@/pages/statistics/retry/StatisticsRetryPage';
+import StatisticsListPage from '@/pages/statistics/list/StatisticsListPage';
 
-// // SETTLEMENT
-// import SettlementRetryPage from '@/pages/settlement/retry/SettlementRetryPage';
-// import SettlementListPage from '@/pages/settlement/list/SettlementListPage';
-// import SettlementAggregatePage from '@/pages/settlement/aggregate/SettlementAggregatePage';
+// 카드정산
+import CardListPage from '@/pages/card/list/CardListPage';
+// import CardAggregatePage from '@/pages/card/aggregate/CardAggregatePage';
+import CardReconciliationPage from '@/pages/card/reconciliation/CardReconciliationPage';
+// import CardUnsettledPage from '@/pages/card/unsettled/CardUnsettledPage';
 
-// // RECONCILIATION
-// import ReconciliationPaymentPage from '@/pages/reconciliation/payment/ReconciliationPaymentPage';
-// import ReconciliationUnsettledPage from '@/pages/reconciliation/unsettled/ReconciliationUnsettledPage';
-// import ReconciliationMismatchPage from '@/pages/reconciliation/mismatch/ReconciliationMismatchPage';
+// 휴대폰정산
+// import CardListPage from '@/pages/card/list/CardListPage';
+// import CardListPage from '@/pages/card/aggregate/CardAggregatePage';
+// import CardListPage from '@/pages/card/reconciliation/CardReconciliationPage';
+// import CardListPage from '@/pages/card/unsettled/CardUnsettledPage';
+
+// PAY정산
+// import CardListPage from '@/pages/card/list/CardListPage';
+// import CardListPage from '@/pages/card/aggregate/CardAggregatePage';
+// import CardListPage from '@/pages/card/reconciliation/CardReconciliationPage';
+// import CardListPage from '@/pages/card/unsettled/CardUnsettledPage';
+
 
 // // OPERATION
 // import MerchantPage from '@/pages/operation/merchant/MerchantPage';
@@ -40,27 +49,27 @@ import UserPage from '@/pages/operation/user/UserPage';
 import DevPage from '@/pages/common/dev/DevPage';
 
 export const RouteComponentMap = {
-  // '/dashboard': <DashboardPage />,
+  '/dashboard': <DashboardPage />,
 
   // // PAYMENT
   '/payment/list': <PaymentsListPage />,
-  // '/payment/fail': <PaymentsFailPage />,
-  // '/payment/cancel': <PaymentsCancelPage />,
-  // '/payment/refund': <PaymentsRefundPage />,
+  '/payment/fail': <PaymentsFailPage />,
+  '/payment/cancel': <PaymentsCancelPage />,
+  '/payment/refund': <PaymentsRefundPage />,
 
-  // // STATISTIC
-  // '/statistic/retry': <StatisticRetryPage />,
-  // '/statistic/list': <StatisticListPage />,
+  // // STATISTICS
+  '/statistics/retry': <StatisticsRetryPage />,
+  '/statistics/list': <StatisticsListPage />,
 
-  // // SETTLEMENT
-  // '/settlement/retry': <SettlementRetryPage />,
-  // '/settlement/list': <SettlementListPage />,
-  // '/settlement/aggregate': <SettlementAggregatePage />,
+  // 카드정산
+  '/card-settlement/list': <CardListPage />,
+  // '/card-settlement/aggregate': <CardAggregatePage />,
+  '/card-settlement/reconciliation': <CardReconciliationPage />,
+  // '/card-settlement/unsettled': <CardUnsettledPage />,
 
-  // // RECONCILIATION
-  // '/reconciliation/payment': <ReconciliationPaymentPage />,
-  // '/reconciliation/unsettled': <ReconciliationUnsettledPage />,
-  // '/reconciliation/mismatch': <ReconciliationMismatchPage />,
+  //휴대폰정산
+
+  //pay정산
 
   // // OPERATION
   // '/operation/merchant': <MerchantPage />,

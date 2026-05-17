@@ -1,0 +1,29 @@
+.statistics-summary-container {
+  margin-bottom: 20px;
+
+  padding: 20px;
+
+  border: 1px solid #dcdfe6;
+  border-radius: 8px;
+
+  background-color: #ffffff;
+}
+
+.statistics-summary-row {
+  display: flex;
+  gap: 40px;
+
+  margin-bottom: 14px;
+
+  font-size: 15px;
+}
+
+.statistics-summary-row:last-child {
+  margin-bottom: 0;
+}
+
+.statistics-summary-row strong {
+  margin-left: 6px;
+
+  font-size: 16px;
+}

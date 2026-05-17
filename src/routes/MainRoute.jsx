@@ -7,7 +7,6 @@ import ErrorPage from '@/pages/common/error/ErrorPage';
 import MainLayout from '@/layouts/MainLayout';
 import DashboardPage from '@/pages/dash/DashboardPage';
 
-import ProtectedRoute from '@/routes/ProtectedRoute';
 import { RouteComponentMap } from '@/routes/RouteComponentMap';
 
 import '@/css/layout.css';
@@ -16,6 +15,9 @@ import '@/css/component.css';
 function MainRoute() {
   const isLogin = useSelector(state => state.auth.isLogin);
   const menuList = useSelector(state => state.menu.menuList);
+  const isMenuExist = menuList.length == 0 ? false : true;
+  console.log("isLogin",isLogin);
+  console.log("menuList",menuList);
 
   // console.log("isLogin",isLogin);
 
@@ -61,13 +63,6 @@ function MainRoute() {
         path="/login"
         element={isLogin ? <Navigate to="/dashboard" /> : <LoginPage />}
       />
-      {/* 대시보드 페이지 */}
-      <Route
-        path="/dashboard"
-        element={isLogin ? <MainLayout /> : <Navigate to="/login" replace />}
-      >
-        <Route index element={<DashboardPage />} />
-      </Route>
 
       {/* 메인 페이지 */}
       <Route 
@@ -82,7 +77,11 @@ function MainRoute() {
       />
 
       {/* 404 */}
-      <Route path="*" element={isLogin ? <ErrorPage /> : <Navigate to="/login" replace />} />
+      <Route 
+        path="*" 
+        element={isLogin && isMenuExist ? <ErrorPage /> 
+                : isLogin && !isMenuExist ? null 
+                : <Navigate to="/login" replace />} />
     </Routes>
   );
 }

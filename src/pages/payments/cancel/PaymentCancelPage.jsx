@@ -1,61 +1,33 @@
 import { useEffect, useState } from 'react';
-import { paymentListApi } from '@/pages/payments/list/paymentListApi.js';
-import PaymentListPageView from '@/pages/payments/list/PaymentListPageView.jsx';
-import { useSelector } from 'react-redux';
+
+import { paymentCancelApi } from '@/pages/payments/cancel/paymentCancelApi';
+import PaymentCancelPageView from '@/pages/payments/cancel/PaymentCancelPageView';
 import { merchantApi } from '@/pages/merchant/merchantApi.js';
 
-function PaymentListPage() {
-  const payMethodOptions = useSelector(
-    state => state.code.codeList['PAY_METHOD'] || []
-  );
-  const payStatusOptions = useSelector(
-    state => state.code.codeList['PAY_STATUS'] || []
-  );
-  const payMethodSelectOptions = [
-    { label: '전체', value: '' },
+function PaymentCancelPage() {
 
-    ...payMethodOptions.map(item => ({
-      label: item.codeName,
-      value: item.code
-    }))
-  ];
-  const payStatusSelectOptions = [
-    { label: '전체', value: '' },
-
-    ...payStatusOptions.map(item => ({
-      label: item.codeName,
-      value: item.code
-    }))
-  ];
-
-
-  // search params
-  const [merchantSelectOptions, setMerchantSelectOptions] = useState([]);
   const [merchantId, setMerchantId] = useState();
-  const [payMethod, setPayMethod] = useState();
-  const [payStatus, setPayStatus] = useState();
 
   const formatDate = (d) => d.toISOString().slice(0, 10);
+
   const [baseDateFrom, setBaseDateFrom] = useState('2026-01-01');
   const [baseDateTo, setBaseDateTo] = useState(formatDate(new Date()));
 
-  // result
-  const [paymentList, setPaymentList] = useState([]);
+  const [merchantSelectOptions, setMerchantSelectOptions] = useState([]);
+  const [cancelList, setCancelList] = useState([]);
   const [totalCount, setTotalCount] = useState(0);
 
-  // paging
   const [currentPage, setCurrentPage] = useState(1);
+
   const pageSize = 10;
 
   const columns = [
     { field: 'merchantId', headerName: '가맹점ID' },
     { field: 'baseDate', headerName: '기준일' },
     { field: 'txSeq', headerName: '거래순번' },
-    { field: 'merchantOrderId', headerName: '주문번호' },
-    { field: 'payMethodName', headerName: '결제수단' },
-    { field: 'payProviderName', headerName: '결제수단' },
-    { field: 'amount', headerName: '금액' },
-    { field: 'payStatusName', headerName: '상태' },
+    { field: 'cancelCode', headerName: '취소코드' },
+    { field: 'cancelMessage', headerName: '취소메시지' },
+    { field: 'originalTxSeq', headerName: '원거래순번' },
     { field: 'createdAt', headerName: '생성일' }
   ];
 
@@ -68,6 +40,7 @@ function PaymentListPage() {
   }, [currentPage]);
 
   const handleSelect = async () => {
+
     try {
 
       const reqParams = {
@@ -75,23 +48,24 @@ function PaymentListPage() {
         size: pageSize,
 
         ...(merchantId ? { merchantId } : {}),
-        ...(payMethod ? { payMethod } : {}),
-        ...(payStatus ? { payStatus } : {}),
 
-        ...(baseDateFrom ? {baseDateFrom: baseDateFrom.replaceAll('-', '')} : {}),
-        ...(baseDateTo ? {baseDateTo: baseDateTo.replaceAll('-', '')} : {})
+        ...(baseDateFrom
+          ? { baseDateFrom: baseDateFrom.replaceAll('-', '') }
+          : {}),
+
+        ...(baseDateTo
+          ? { baseDateTo: baseDateTo.replaceAll('-', '') }
+          : {})
       };
 
-      console.log("reqParams",reqParams);
-
       const { code, message, data } =
-        await paymentListApi.reqPostPaymentList(reqParams);
+        await paymentCancelApi.reqPostPaymentCancelList(reqParams);
 
       if (code !== '0000') {
         throw new Error(message);
       }
 
-      setPaymentList(data.list);
+      setCancelList(data.list);
       setTotalCount(data.totalCount);
 
     } catch (err) {
@@ -99,7 +73,6 @@ function PaymentListPage() {
     }
   };
 
-  
   const handleMerchantList = async () => {
     try {
 
@@ -128,8 +101,6 @@ function PaymentListPage() {
     }
   };
 
-
-
   const handleAdd = () => alert('개발 진행 중');
   const handleUpdate = () => alert('개발 진행 중');
   const handleDelete = () => alert('개발 진행 중');
@@ -140,7 +111,7 @@ function PaymentListPage() {
   };
 
   return (
-    <PaymentListPageView
+    <PaymentCancelPageView
       merchantId={merchantId}
       setMerchantId={setMerchantId}
 
@@ -150,18 +121,10 @@ function PaymentListPage() {
       baseDateTo={baseDateTo}
       setBaseDateTo={setBaseDateTo}
 
-      payMethod={payMethod}
-      setPayMethod={setPayMethod}
-
-      payStatus={payStatus}
-      setPayStatus={setPayStatus}
-
-      payMethodSelectOptions={payMethodSelectOptions}
-      payStatusSelectOptions={payStatusSelectOptions}
-      merchantSelectOptions={merchantSelectOptions}
-
-      paymentList={paymentList}
+      cancelList={cancelList}
       totalCount={totalCount}
+
+      merchantSelectOptions={merchantSelectOptions}
 
       columns={columns}
       currentPage={currentPage}
@@ -177,4 +140,4 @@ function PaymentListPage() {
   );
 }
 
-export default PaymentListPage;
+export default PaymentCancelPage;

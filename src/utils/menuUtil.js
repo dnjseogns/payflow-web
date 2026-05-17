@@ -33,3 +33,22 @@ export const findBreadcrumb = (menuList, pathname) => {
 
   return recursive(menuList) || [];
 };
+
+
+export function flattenMenu(menuList) {
+  const result = [];
+
+  const dfs = (menus) => {
+    menus.forEach(menu => {
+      result.push(menu);
+
+      if (menu.children && menu.children.length > 0) {
+        dfs(menu.children);
+      }
+    });
+  };
+
+  dfs(menuList);
+
+  return result;
+}

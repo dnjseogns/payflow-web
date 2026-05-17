@@ -1,4 +1,7 @@
 import axios from 'axios';
+import { logoutClear } from '@/common/auth/authUtil';
+import { useDispatch } from 'react-redux';
+import { store } from '@/redux/store/store';
 
 const ACCESS_TOKEN = "accessToken";
 let isRefreshing = false;
@@ -42,6 +45,11 @@ instance.interceptors.response.use(
 
     // 정상 응답 반환
     async (response) => {
+        if(response.data.code === "2000"){
+            const accessToken = localStorage?.getItem('accessToken');
+            logoutClear(store.dispatch);
+            return;
+        }
         // 만료 처리 (예: 토큰 만료 코드)
         if (response.data.code === "2001") {
             // 이미 refresh 중이면 대기

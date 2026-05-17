@@ -60,6 +60,16 @@
   font-size: 14px;
 }
 
+.action-buttons button:disabled {
+  background-color: #9ca3af;  /* 회색 계열 */
+  color: #e5e7eb;
+
+  cursor: not-allowed;
+  opacity: 0.6;
+
+  box-shadow: none;
+}
+
 .action-buttons button:hover {
   opacity: 0.9;
 }
